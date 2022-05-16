@@ -23,7 +23,7 @@ void PlayGroundLayer::onAttach(){
 	m_shader = new Shader("PlayGround/Assets/glsl/mainShader.glsl");
 	m_textShader = new Shader("PlayGround/Assets/glsl/textShader.glsl");
 
-	m_camera = new Camera({0.0f, 0.0f, 2.5f}, {0.0f, 0.0f, -1.0f}, {0.0f, 1.0f, 0.0f});
+	m_camera = new Camera({0.0f, 0.0f, 7.5f}, {0.0f, 0.0f, -1.0f}, {0.0f, 1.0f, 0.0f});
 
 	m_quadColour = {0.34f, 0.57f, 0.89f};
 
@@ -83,11 +83,23 @@ void PlayGroundLayer::onRender(){
 
     glBindVertexArray(m_vao);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
-	m_textRenderer->render(m_frameRate.str(), {0.0f, 15.0f}, 0.5f, {0.0f, 1.0f, 0.0f}, false);
+	m_textRenderer->render(m_frameRate.str(), {0.0f, 30.0f}, 0.5f, {0.0f, 1.0f, 0.0f}, false);
 }
 
 void PlayGroundLayer::onRenderImgui(){
+
+
     ImGui::Begin("Main Window");
+
+	if (ImGui::BeginMainMenuBar()){
+		if (ImGui::BeginMenu("This is a menu button")){
+			if (ImGui::MenuItem("Hello!")){
+			}
+			ImGui::EndMenu();
+		}
+		ImGui::EndMainMenuBar();
+	}
+
 	ImGui::ColorEdit3("Quad Colour", &m_quadColour[0]);
     ImGui::End();
 }
