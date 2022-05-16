@@ -5,12 +5,15 @@
 #include <string>
 #include <iostream>
 
+
 class Window{
     public:
         Window(const std::string& label, uint32_t width, uint32_t height);
         ~Window();
 
-        GLFWwindow* getContext();
+        GLFWwindow** getContext();
+        uint32_t getWidth();
+        uint32_t getHeight();
         void update();
         bool isOpen();
     

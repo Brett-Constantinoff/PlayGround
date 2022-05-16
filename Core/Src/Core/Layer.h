@@ -2,7 +2,7 @@
 #define LAYER_H
 
 #include <string>
-#include "../OpenGL/OpenglBuild.h"
+#include "Window.h"
 
 class Layer{
     public: 
@@ -11,13 +11,12 @@ class Layer{
 
         virtual void onAttach() {};
         virtual void onDetach() {};
-        virtual void onUpdate(float dt, GLFWwindow* win) {};
+        virtual void onUpdate(float dt, Window* win) {};
         virtual void onRender() {};
         virtual void onRenderImgui() {};
 
     protected:
         std::string m_name;
-        GLFWwindow* m_winID;
 
 };
 

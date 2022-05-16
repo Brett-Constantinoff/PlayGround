@@ -22,8 +22,16 @@ Window::~Window(){
     glfwDestroyWindow(m_winID);
 }
 
-GLFWwindow* Window::getContext(){
-    return m_winID;
+GLFWwindow** Window::getContext(){
+    return &m_winID;
+}
+
+uint32_t Window::getWidth(){
+    return m_width;
+}
+
+uint32_t Window::getHeight(){
+    return m_height;
 }
 
 bool Window::isOpen(){
