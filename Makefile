@@ -1,6 +1,6 @@
 CC=g++ -std=c++11
 CFLAGS=-Wall -g -Wno-unused-variable -pthread
-LDFLAGS=-lglfw -lglew -lfreetype -framework OpenGL
+LDFLAGS= -LCore/Libs/GLFW/ -lglfw -LCore/Libs/GL/ -lglew -lfreetype -framework OpenGL
 OPTS = -I Core/Libs/IrrKlang/libbirrklang.dylib -pthread
 
 
