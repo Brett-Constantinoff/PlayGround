@@ -29,12 +29,10 @@
             void loadFont(std::string font, uint32_t fontSize){
                 m_font = font;
                 m_fontSize = fontSize;
-                //clear any previous characters
                 m_characters.clear();
                 init();
             };
             void render(std::string text, glm::vec2 pos, float size, glm::vec3 colour, bool centered){
-                //set the render state
                 m_shader->use();
                 m_shader->setVec3("uColour", colour);
                 glActiveTexture(GL_TEXTURE0);
@@ -55,7 +53,6 @@
                     pos.x -= half;
                 }
 
-                //iterate through characters in text
                 for(c = text.begin(); c != text.end(); c++){
                     Character ch = m_characters[*c];
 
@@ -66,23 +63,22 @@
                     float h = ch.size.y * size;
 
                     float vertexData[6][4]{
-                        {xPos, yPos + h, 0.0f, 1.0f},
-                        {xPos + w, yPos, 1.0f, 0.0f},
-                        {xPos, yPos,     0.0f, 0.0f},
-                        {xPos, yPos + h, 0.0f, 1.0f},
-                        {xPos + w, yPos + h, 1.0f, 1.0f},
-                        {xPos + w, yPos, 1.0f, 0.0f}
+                        // pos                      // uv
+                        {xPos,     yPos + h,        0.0f, 1.0f},
+                        {xPos + w, yPos,            1.0f, 0.0f},
+                        {xPos,     yPos,            0.0f, 0.0f},
+                        {xPos,     yPos + h,        0.0f, 1.0f},
+                        {xPos + w, yPos + h,        1.0f, 1.0f},
+                        {xPos + w, yPos,            1.0f, 0.0f}
                     };
 
                     //render texture over quad
                     glBindTexture(GL_TEXTURE_2D, ch.textureID);
 
-                    //update vbo
                     glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
                     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertexData), vertexData);
                     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-                    //render
                     glDrawArrays(GL_TRIANGLES, 0, 6);
 
                     //advance by number of pixles, >> 6 = 2^6 = 64 since advance is in 1/64 pixels
@@ -92,18 +88,17 @@
         
         private:
             void init( void ){
-                //initialize free type library
                 FT_Library freeType;
                 if(FT_Init_FreeType(&freeType)){
-                std::cout << "ERROR INITIALIZING FREETYPE LIBRARY!\n";
-                exit(EXIT_FAILURE);
+                    std::cout << "ERROR INITIALIZING FREETYPE LIBRARY!\n";
+                    exit(EXIT_FAILURE);
                 }
 
                 //load font into a face
                 FT_Face face;
                 if(FT_New_Face(freeType, m_font.c_str(), 0, &face)){
-                std::cout << "ERROR LOADING " << m_font << " FILE!\n";
-                exit(EXIT_FAILURE);
+                    std::cout << "ERROR LOADING " << m_font << " FILE!\n";
+                    exit(EXIT_FAILURE);
                 }
 
                 //define pixel font size
@@ -116,62 +111,55 @@
                 //generate data for each ASCII character
                 for(uint8_t c = 0; c < 128; c++){
 
-                //load the character glyph
-                if(FT_Load_Char(face, c, FT_LOAD_RENDER)){
-                    std::cout << "ERROR LOADING GLYPH!\n";
-                    exit(EXIT_FAILURE);
-                }
+                    if(FT_Load_Char(face, c, FT_LOAD_RENDER)){
+                        std::cout << "ERROR LOADING GLYPH!\n";
+                        exit(EXIT_FAILURE);
+                    }
 
-                //load texture
-                uint32_t textureID;
-                glGenTextures(1, &textureID);
-                glBindTexture(GL_TEXTURE_2D, textureID);
-                glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, 
-                                face->glyph->bitmap.width, face->glyph->bitmap.rows, 0, 
-                                GL_RED, GL_UNSIGNED_BYTE, face->glyph->bitmap.buffer);
+                    uint32_t textureID;
+                    glGenTextures(1, &textureID);
+                    glBindTexture(GL_TEXTURE_2D, textureID);
+                    glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, 
+                                    face->glyph->bitmap.width, face->glyph->bitmap.rows, 0, 
+                                    GL_RED, GL_UNSIGNED_BYTE, face->glyph->bitmap.buffer);
 
-                // set texture options
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-                //create a new character
-                Character character = {
-                    textureID, 
-                    {face->glyph->bitmap.width, face->glyph->bitmap.rows},
-                    {face->glyph->bitmap_left, face->glyph->bitmap_top}, 
-                    static_cast<uint32_t>(face->glyph->advance.x)
-                };
+                    Character character = {
+                        textureID, 
+                        {face->glyph->bitmap.width, face->glyph->bitmap.rows},
+                        {face->glyph->bitmap_left, face->glyph->bitmap_top}, 
+                        static_cast<uint32_t>(face->glyph->advance.x)
+                    };
+                    m_characters.insert(std::pair<char, Character>(c, character));
+                    }
 
-                //insert into map with its associated ASCII value
-                m_characters.insert(std::pair<char, Character>(c, character));
-                }
-                glBindTexture(GL_TEXTURE_2D, 0);
+                    glBindTexture(GL_TEXTURE_2D, 0);
 
-                //deallocate res
-                FT_Done_Face(face);
-                FT_Done_FreeType(freeType);
+                    FT_Done_Face(face);
+                    FT_Done_FreeType(freeType);
 
-                //create our projection matrix
-                glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(m_windowWidth), static_cast<float>(m_windowHeight), 0.0f);
+                    glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(m_windowWidth), static_cast<float>(m_windowHeight), 0.0f);
 
-                //load and setup shader
-                m_shader->use();
-                m_shader->setMat4("uProjection", projection);
-                m_shader->setInt("uTexture", 0);
+                    m_shader->use();
+                    m_shader->setMat4("uProjection", projection);
+                    m_shader->setInt("uTexture", 0);
 
-                //setup buffers
-                glGenVertexArrays(1, &m_vao);
-                glBindVertexArray(m_vao);
-                glGenBuffers(1, &m_vbo);
-                glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-                //the data will change often so use GL_DYNAMIC_DRAW
-                glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
-                glEnableVertexAttribArray(0);
-                glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
-                glBindBuffer(GL_ARRAY_BUFFER, 0);
-                glBindVertexArray(0);
+                    glGenVertexArrays(1, &m_vao);
+                    glBindVertexArray(m_vao);
+
+                    glGenBuffers(1, &m_vbo);
+                    glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
+            
+                    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
+                    glEnableVertexAttribArray(0);
+                    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
+
+                    glBindBuffer(GL_ARRAY_BUFFER, 0);
+                    glBindVertexArray(0);
             }
     
 
