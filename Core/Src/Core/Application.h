@@ -8,6 +8,7 @@
 #include "../OpenGL/OpenglLayer.h"
 #include "../ImGui/ImguiLayer.h"
 
+
 class Application{
     public:
         Application(const std::string& label = "Application", uint32_t width = 1080, uint32_t height = 720);
@@ -22,13 +23,6 @@ class Application{
         Window* m_window;   
         LayerStack* m_layerStack;
         float m_lastFrame = 0.0f;
-        
-    protected:
-        const std::string& m_label;
-        uint32_t m_width;
-        uint32_t m_height;
-
-
 };
 
 #endif
