@@ -29,7 +29,7 @@ class PlayGroundLayer : public Layer{
         Shader* m_shader;
         Shader* m_textShader;
         Camera* m_camera;
-        TextRenderer* m_textRenderer;
+        //TextRenderer* m_textRenderer;
         uint32_t m_vao;
         uint32_t m_vbo;
         uint32_t m_ibo;

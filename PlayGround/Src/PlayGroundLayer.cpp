@@ -8,7 +8,7 @@ PlayGroundLayer::~PlayGroundLayer(){
     delete m_shader;
 	delete m_textShader;
 	delete m_camera;
-	delete m_textRenderer;
+	//delete m_textRenderer;
     glDeleteVertexArrays(1, &m_vao);
 	glDeleteBuffers(1, &m_vbo);
 	glDeleteBuffers(1, &m_ibo);
@@ -53,8 +53,8 @@ void PlayGroundLayer::onAttach(){
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-	m_textRenderer = new TextRenderer(m_textShader, 1080, 720);
-	m_textRenderer->loadFont("PlayGround/Assets/fonts/OCRAEXT.TTF", 24);
+	//m_textRenderer = new TextRenderer(m_textShader, 1080, 720);
+	//m_textRenderer->loadFont("PlayGround/Assets/fonts/OCRAEXT.TTF", 24);
 }
 
 void PlayGroundLayer::onDetach(){
@@ -83,7 +83,7 @@ void PlayGroundLayer::onRender(){
 
     glBindVertexArray(m_vao);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
-	m_textRenderer->render(m_frameRate.str(), {0.0f, 30.0f}, 0.5f, {0.0f, 1.0f, 0.0f}, false);
+	//m_textRenderer->render(m_frameRate.str(), {0.0f, 30.0f}, 0.5f, {0.0f, 1.0f, 0.0f}, false);
 }
 
 void PlayGroundLayer::onRenderImgui(){
