@@ -7,6 +7,8 @@ PlayGroundLayer::PlayGroundLayer(){
 PlayGroundLayer::~PlayGroundLayer(){
     delete m_shader;
 	delete m_textShader;
+	delete m_camera;
+	delete m_textRenderer;
     glDeleteVertexArrays(1, &m_vao);
 	glDeleteBuffers(1, &m_vbo);
 	glDeleteBuffers(1, &m_ibo);
