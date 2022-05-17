@@ -1,6 +1,6 @@
 CC=g++ -std=c++11
 CFLAGS=-Wall -g -Wno-unused-variable -pthread
-LIBS= -L Core/Libs/GLFW/ -L Core/Libs/GL/ -lglfw -lglew -weak-lfreetype -framework OpenGL
+LIBS= -lglfw -lglew -lfreetype -framework OpenGL
 OPTS = -I Core/Libs/IrrKlang/libbirrklang.dylib -pthread
 
 #recursivly finds all cpp files in src
