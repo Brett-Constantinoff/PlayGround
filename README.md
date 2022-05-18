@@ -9,8 +9,8 @@ In order to successfully compile and link the neccessary files both GLFW and GLE
 installed and the required dylib files must be in your linker path
 
 To install GLFW and GLEW use homebrew following the commands:
-```brew install glfw```
-```brew install glew```
+- ```brew install glfw```
+- ```brew install glew```
 
 You can also install and build both GLFW and GLEW yourself by visiting:
 - https://www.glfw.org/
@@ -22,6 +22,7 @@ Or go directly to their github:
 
 Once these libraries are installed, verify that the dylib files are in the path your linker will
 look usually /usr/local/lib and /usr/local as well as ensure the neccessary header files are located in your compiler's include path which is usually /usr/local/include
+
 
 # Optional Requirements
 
