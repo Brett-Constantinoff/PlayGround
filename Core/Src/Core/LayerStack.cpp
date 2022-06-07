@@ -13,9 +13,9 @@ LayerStack::~LayerStack()
     }
 }
 
-void LayerStack::push(Layer* layer)
+void LayerStack::push(Layer* layer, Window* win)
 {
-    layer->onAttach();
+    layer->onAttach(win);
     m_layers.insert(m_layers.begin(), layer);
 }
 

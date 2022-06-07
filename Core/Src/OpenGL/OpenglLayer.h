@@ -9,6 +9,6 @@ class OpenglLayer : public Layer
         OpenglLayer();
         ~OpenglLayer();
 
-        virtual void onAttach() override;
+        virtual void onAttach(Window* win) override;
 };
 

@@ -9,7 +9,7 @@ OpenglLayer::~OpenglLayer()
     glfwTerminate();
 }
 
-void OpenglLayer::onAttach()
+void OpenglLayer::onAttach(Window* win)
 {
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);

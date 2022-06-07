@@ -9,7 +9,7 @@ class LayerStack
         LayerStack();
         ~LayerStack();
 
-        void push(Layer* layer);
+        void push(Layer* layer, Window* win);
         void pop();
 
         std::vector<Layer*>::iterator begin()

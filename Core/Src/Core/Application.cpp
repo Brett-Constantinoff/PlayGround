@@ -10,7 +10,7 @@ Application::Application(const std::string& label, uint32_t width, uint32_t heig
 
     m_window = new Window(label, width, height);
 
-    m_imguiLayer = new ImguiLayer(*m_window->getContext());
+    m_imguiLayer = new ImguiLayer();
     pushLayer(m_imguiLayer);
 }
 
@@ -21,7 +21,7 @@ Application::~Application()
 
 void Application::pushLayer(Layer* layer)
 {
-    m_layerStack->push(layer);
+    m_layerStack->push(layer, m_window);
 }
 
 void Application::start()
@@ -35,7 +35,7 @@ void Application::start()
         m_imguiLayer->begin();
         for(Layer* layer : *m_layerStack)
         {
-            layer->onUpdate(dt, m_window);
+            layer->onUpdate(dt);
             layer->onRender();
             layer->onRenderImgui();
         }

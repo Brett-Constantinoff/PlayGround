@@ -1,7 +1,6 @@
 #include "ImguiLayer.h"
 
-ImguiLayer::ImguiLayer(GLFWwindow *win) : 
-m_win{win}
+ImguiLayer::ImguiLayer()
 {
 
 }
@@ -27,12 +26,12 @@ void ImguiLayer::end()
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-void ImguiLayer::onAttach()
+void ImguiLayer::onAttach(Window* win)
 {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io; 
     ImGui::StyleColorsDark();
-    ImGui_ImplGlfw_InitForOpenGL(m_win, true);
+    ImGui_ImplGlfw_InitForOpenGL(*win->getContext(), true);
     ImGui_ImplOpenGL3_Init("#version 150");
 }

@@ -19,13 +19,14 @@ class PlayGroundLayer : public Layer
         PlayGroundLayer();
         virtual ~PlayGroundLayer();
 
-        virtual void onAttach() override;
+        virtual void onAttach(Window* win) override;
         virtual void onDetach() override;
-        virtual void onUpdate(float dt, Window* win) override;
+        virtual void onUpdate(float dt) override;
         virtual void onRender() override; 
         virtual void onRenderImgui() override;
 
     private:
+        Window* m_window;
         Shader* m_shader;
         Shader* m_textShader;
         Camera* m_camera;

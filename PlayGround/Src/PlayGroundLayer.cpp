@@ -16,11 +16,13 @@ PlayGroundLayer::~PlayGroundLayer()
 	glDeleteBuffers(1, &m_ibo);
 }
 
-void PlayGroundLayer::onAttach()
+void PlayGroundLayer::onAttach(Window* win)
 {
     glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	m_window = win;
 
 	m_shader = new Shader("PlayGround/Assets/glsl/mainShader.glsl");
 	m_textShader = new Shader("PlayGround/Assets/glsl/textShader.glsl");
@@ -55,7 +57,7 @@ void PlayGroundLayer::onAttach()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-	m_textRenderer = new TextRenderer(m_textShader, 1080, 720);
+	m_textRenderer = new TextRenderer(m_textShader, m_window->getWidth(), m_window->getWidth());
 	m_textRenderer->loadFont("PlayGround/Assets/fonts/OCRAEXT.TTF", 24);
 }
 
@@ -64,11 +66,11 @@ void PlayGroundLayer::onDetach()
 
 }
 
-void PlayGroundLayer::onUpdate(float dt, Window* win)
+void PlayGroundLayer::onUpdate(float dt)
 {
-	m_camera->move(win->getContext(), dt);
+	m_camera->move(m_window->getContext(), dt);
 
-	m_projection = glm::perspective(glm::radians(45.0f), static_cast<float>(win->getWidth()) / static_cast<float>(win->getHeight()), 0.1f, 100.0f);
+	m_projection = glm::perspective(glm::radians(45.0f), static_cast<float>(m_window->getWidth()) / static_cast<float>(m_window->getHeight()), 0.1f, 100.0f);
 	m_view = *m_camera->getView();
     glClearColor(0.25f, 0.25f, 0.25f, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
