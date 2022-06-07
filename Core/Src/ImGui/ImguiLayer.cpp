@@ -1,31 +1,34 @@
 #include "ImguiLayer.h"
 
 ImguiLayer::ImguiLayer(GLFWwindow *win) : 
-    m_win{win}{
+m_win{win}
+{
 
 }
 
-ImguiLayer::~ImguiLayer(){
+ImguiLayer::~ImguiLayer()
+{
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
 }
 
 
-void ImguiLayer::begin(){
+void ImguiLayer::begin()
+{
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
-
-
 }
 
-void ImguiLayer::end(){
+void ImguiLayer::end()
+{
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-void ImguiLayer::onAttach(){
+void ImguiLayer::onAttach()
+{
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io; 

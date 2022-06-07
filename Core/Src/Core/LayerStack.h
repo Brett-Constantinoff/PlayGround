@@ -1,10 +1,10 @@
-#ifndef LAYERSTACK_H
-#define LAYERSTACK_H
+#pragma once
 
 #include <vector>
 #include "Layer.h"
 
-class LayerStack{
+class LayerStack
+{
     public:
         LayerStack();
         ~LayerStack();
@@ -12,10 +12,12 @@ class LayerStack{
         void push(Layer* layer);
         void pop();
 
-        std::vector<Layer*>::iterator begin() {
+        std::vector<Layer*>::iterator begin()
+        {
             return m_layers.begin();
         }
-        std::vector<Layer*>::iterator end(){
+        std::vector<Layer*>::iterator end()
+        {
             return m_layers.end();
         }
 
@@ -23,5 +25,3 @@ class LayerStack{
             std::vector<Layer*> m_layers;
            
 };
-
-#endif

@@ -1,5 +1,5 @@
-#ifndef WINDOW_H
-#define WINDOW_H
+#pragma once
+
 
 #include "../OpenGL/OpenglBuild.h"
 #include <string>
@@ -24,4 +24,3 @@ class Window{
         uint32_t m_height;
 };
 
-#endif

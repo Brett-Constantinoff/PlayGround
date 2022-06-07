@@ -1,5 +1,7 @@
 #include "PlayGroundApp.h"
 
-PlayGroundApp::PlayGroundApp() : Application(){
+PlayGroundApp::PlayGroundApp() : 
+Application()
+{
     pushLayer(new PlayGroundLayer());
 }

@@ -1,10 +1,10 @@
-#ifndef OPENGLLAYER_H
-#define OPENGLLAYER_H
+#pragma once
 
 #include "../Core/Layer.h"
 #include "OpenglBuild.h"
 
-class OpenglLayer : public Layer{
+class OpenglLayer : public Layer
+{
     public:
         OpenglLayer();
         ~OpenglLayer();
@@ -12,4 +12,3 @@ class OpenglLayer : public Layer{
         virtual void onAttach() override;
 };
 
-#endif

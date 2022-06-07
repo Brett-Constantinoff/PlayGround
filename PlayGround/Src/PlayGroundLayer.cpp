@@ -1,10 +1,12 @@
 #include "PlayGroundLayer.h"
 
-PlayGroundLayer::PlayGroundLayer(){
+PlayGroundLayer::PlayGroundLayer()
+{
 
 }
 
-PlayGroundLayer::~PlayGroundLayer(){
+PlayGroundLayer::~PlayGroundLayer()
+{
     delete m_shader;
 	delete m_textShader;
 	delete m_camera;
@@ -12,10 +14,10 @@ PlayGroundLayer::~PlayGroundLayer(){
     glDeleteVertexArrays(1, &m_vao);
 	glDeleteBuffers(1, &m_vbo);
 	glDeleteBuffers(1, &m_ibo);
-
 }
 
-void PlayGroundLayer::onAttach(){
+void PlayGroundLayer::onAttach()
+{
     glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -57,11 +59,13 @@ void PlayGroundLayer::onAttach(){
 	m_textRenderer->loadFont("PlayGround/Assets/fonts/OCRAEXT.TTF", 24);
 }
 
-void PlayGroundLayer::onDetach(){
+void PlayGroundLayer::onDetach()
+{
 
 }
 
-void PlayGroundLayer::onUpdate(float dt, Window* win){
+void PlayGroundLayer::onUpdate(float dt, Window* win)
+{
 	m_camera->move(win->getContext(), dt);
 
 	m_projection = glm::perspective(glm::radians(45.0f), static_cast<float>(win->getWidth()) / static_cast<float>(win->getHeight()), 0.1f, 100.0f);
@@ -73,7 +77,8 @@ void PlayGroundLayer::onUpdate(float dt, Window* win){
 	m_frameRate << ImGui::GetIO().Framerate << " FPS";
 };
 
-void PlayGroundLayer::onRender(){
+void PlayGroundLayer::onRender()
+{
 	glUseProgram(m_shader->getId());
 
 	m_shader->setMat4("uProjection", m_projection);
@@ -86,14 +91,17 @@ void PlayGroundLayer::onRender(){
 	m_textRenderer->render(m_frameRate.str(), {0.0f, 30.0f}, 0.5f, {0.0f, 1.0f, 0.0f}, false);
 }
 
-void PlayGroundLayer::onRenderImgui(){
-
-
+void PlayGroundLayer::onRenderImgui()
+{
     ImGui::Begin("Main Window");
 
-	if (ImGui::BeginMainMenuBar()){
-		if (ImGui::BeginMenu("This is a menu button")){
-			if (ImGui::MenuItem("Hello!")){
+	if (ImGui::BeginMainMenuBar())
+	{
+		if (ImGui::BeginMenu("This is a menu button"))
+		{
+			if (ImGui::MenuItem("Hello!"))
+			{
+
 			}
 			ImGui::EndMenu();
 		}

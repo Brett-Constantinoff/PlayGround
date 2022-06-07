@@ -1,6 +1,7 @@
 #include "PlayGroundApp.h"
 
-int main(){
+int main()
+{
     PlayGroundApp* playGroundApp = new PlayGroundApp();
     playGroundApp->start();
     delete playGroundApp;

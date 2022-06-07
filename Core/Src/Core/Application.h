@@ -1,5 +1,4 @@
-#ifndef APPLICATION_H
-#define APPLICATION_H
+#pragma once
 
 #include <string.h>
 #include "Window.h"
@@ -8,8 +7,8 @@
 #include "../OpenGL/OpenglLayer.h"
 #include "../ImGui/ImguiLayer.h"
 
-
-class Application{
+class Application
+{
     public:
         Application(const std::string& label = "Application", uint32_t width = 1080, uint32_t height = 720);
         virtual ~Application() = 0;
@@ -25,4 +24,3 @@ class Application{
         float m_lastFrame = 0.0f;
 };
 
-#endif

@@ -1,11 +1,11 @@
-#ifndef IMGUILAYER_H
-#define IMGUILAYER_H
+#pragma once
 
 #include "../Core/Layer.h"
 #include "ImguiBuild.h"
 
 
-class ImguiLayer : public Layer{
+class ImguiLayer : public Layer
+{
     public:
         ImguiLayer(GLFWwindow* win);
         virtual ~ImguiLayer();
@@ -19,4 +19,3 @@ class ImguiLayer : public Layer{
 };
 
 
-#endif

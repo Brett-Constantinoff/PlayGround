@@ -1,14 +1,12 @@
-#ifndef PLAYGROUNDAPP_H
-#define PLAYGROUNDAPP_H
+#pragma once
 
 #include "../../Core/Src/Core/Application.h"
 #include "../../Core/Util/TextRenderer.h"
 #include "PlayGroundLayer.h"
 
 
-class PlayGroundApp : public Application{
+class PlayGroundApp : public Application
+{
     public:
         PlayGroundApp();
 };
-
-#endif

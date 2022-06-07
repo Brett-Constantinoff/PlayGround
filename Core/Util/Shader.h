@@ -1,15 +1,16 @@
-#ifndef SHADER_H
-#define SHADER_H
+#pragma once
 
 #include <string>
 #include "../Libs/glm/glm.hpp"
 
-struct shaderSource{
+struct shaderSource
+{
     std::string vertexSource;
     std::string fragmentSource;
 };
 
-class Shader{
+class Shader
+{
     public:
         Shader(const std::string &filepath);
         unsigned int getId( void );
@@ -28,4 +29,3 @@ class Shader{
 
 
 
-#endif

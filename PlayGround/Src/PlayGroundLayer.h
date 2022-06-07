@@ -1,5 +1,4 @@
-#ifndef PLAYGROUNDLAYER_H
-#define PLAYGROUNDLAYER_H
+#pragma once
 
 #include "../../Core/Src/Core/Layer.h"
 #include "../../Core/Src/Core/Application.h"
@@ -14,7 +13,8 @@
 #include <iostream>
 #include <sstream>
 
-class PlayGroundLayer : public Layer{
+class PlayGroundLayer : public Layer
+{
     public:
         PlayGroundLayer();
         virtual ~PlayGroundLayer();
@@ -39,8 +39,4 @@ class PlayGroundLayer : public Layer{
         glm::mat4 m_view;
 
         glm::vec3 m_quadColour;
-
-        
 };  
-
-#endif

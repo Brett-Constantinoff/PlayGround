@@ -1,6 +1,7 @@
 #include "Application.h"
 
-Application::Application(const std::string& label, uint32_t width, uint32_t height){
+Application::Application(const std::string& label, uint32_t width, uint32_t height)
+{
 
     m_layerStack = new LayerStack();
     
@@ -13,22 +14,27 @@ Application::Application(const std::string& label, uint32_t width, uint32_t heig
     pushLayer(m_imguiLayer);
 }
 
-Application::~Application(){
+Application::~Application()
+{
     delete m_window;
 }
 
-void Application::pushLayer(Layer* layer){
+void Application::pushLayer(Layer* layer)
+{
     m_layerStack->push(layer);
 }
 
-void Application::start(){
-    while(m_window->isOpen()){
+void Application::start()
+{
+    while(m_window->isOpen())
+    {
         float currFrame = glfwGetTime();
         float dt = currFrame - m_lastFrame;
         m_lastFrame = currFrame;
 
         m_imguiLayer->begin();
-        for(Layer* layer : *m_layerStack){
+        for(Layer* layer : *m_layerStack)
+        {
             layer->onUpdate(dt, m_window);
             layer->onRender();
             layer->onRenderImgui();

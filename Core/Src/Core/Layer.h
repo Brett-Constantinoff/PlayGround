@@ -1,10 +1,10 @@
-#ifndef LAYER_H
-#define LAYER_H
+#pragma once
 
 #include <string>
 #include "Window.h"
 
-class Layer{
+class Layer
+{
     public: 
         Layer(const std::string& name = "Layer");
         virtual ~Layer() = default;
@@ -17,7 +17,5 @@ class Layer{
 
     protected:
         std::string m_name;
-
 };
 
-#endif

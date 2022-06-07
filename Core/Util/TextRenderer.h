@@ -1,5 +1,4 @@
-#ifndef TEXTRENDERER_H
-#define TEXTRENDERER_H
+#pragma once
 
 #if __has_include(<ft2build.h>)
     #include <ft2build.h>
@@ -14,25 +13,33 @@
 
     #include "Shader.h"
 
-    typedef struct{
+    typedef struct
+    {
         uint32_t textureID; //handle for the glyph texture
         glm::ivec2 size; //width and height of glyph in pixels
         glm::ivec2 bearing; //x and y position relatice to the origin and baseline
         uint32_t advance; //distance from the origin to the origin of the next glyph
-    }Character;
+    } Character;
 
-    class TextRenderer{
+    class TextRenderer
+    {
         public:
             TextRenderer( Shader* shader , uint32_t windowWidth, uint32_t windowHeight) 
-                :m_shader{shader}, m_windowWidth{windowWidth}, m_windowHeight{windowHeight}{};
+            :m_shader{shader}, m_windowWidth{windowWidth}, m_windowHeight{windowHeight}
+            {
 
-            void loadFont(std::string font, uint32_t fontSize){
+            };
+
+            void loadFont(std::string font, uint32_t fontSize)
+            {
                 m_font = font;
                 m_fontSize = fontSize;
                 m_characters.clear();
                 init();
             };
-            void render(std::string text, glm::vec2 pos, float size, glm::vec3 colour, bool centered){
+
+            void render(std::string text, glm::vec2 pos, float size, glm::vec3 colour, bool centered)
+            {
                 m_shader->use();
                 m_shader->setVec3("uColour", colour);
                 glActiveTexture(GL_TEXTURE0);
@@ -43,7 +50,8 @@
                 std::string::const_iterator c;
 
                 //center text
-                if(centered){
+                if(centered)
+                {
                     int length = 0;
                     for(c = text.begin(); c != text.end(); c++){
                         Character ch = m_characters[*c];
@@ -53,7 +61,8 @@
                     pos.x -= half;
                 }
 
-                for(c = text.begin(); c != text.end(); c++){
+                for(c = text.begin(); c != text.end(); c++)
+                {
                     Character ch = m_characters[*c];
 
                     float xPos = pos.x + ch.bearing.x * size;
@@ -87,16 +96,19 @@
             }
         
         private:
-            void init( void ){
+            void init( void )
+            {
                 FT_Library freeType;
-                if(FT_Init_FreeType(&freeType)){
+                if(FT_Init_FreeType(&freeType))
+                {
                     std::cout << "ERROR INITIALIZING FREETYPE LIBRARY!\n";
                     exit(EXIT_FAILURE);
                 }
 
                 //load font into a face
                 FT_Face face;
-                if(FT_New_Face(freeType, m_font.c_str(), 0, &face)){
+                if(FT_New_Face(freeType, m_font.c_str(), 0, &face))
+                {
                     std::cout << "ERROR LOADING " << m_font << " FILE!\n";
                     exit(EXIT_FAILURE);
                 }
@@ -109,9 +121,11 @@
                 glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
                 //generate data for each ASCII character
-                for(uint8_t c = 0; c < 128; c++){
+                for(uint8_t c = 0; c < 128; c++)
+                {
 
-                    if(FT_Load_Char(face, c, FT_LOAD_RENDER)){
+                    if(FT_Load_Char(face, c, FT_LOAD_RENDER))
+                    {
                         std::cout << "ERROR LOADING GLYPH!\n";
                         exit(EXIT_FAILURE);
                     }
@@ -135,33 +149,32 @@
                         static_cast<uint32_t>(face->glyph->advance.x)
                     };
                     m_characters.insert(std::pair<char, Character>(c, character));
-                    }
+                }
 
-                    glBindTexture(GL_TEXTURE_2D, 0);
+                glBindTexture(GL_TEXTURE_2D, 0);
 
-                    FT_Done_Face(face);
-                    FT_Done_FreeType(freeType);
+                FT_Done_Face(face);
+                FT_Done_FreeType(freeType);
 
-                    glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(m_windowWidth), static_cast<float>(m_windowHeight), 0.0f);
+                glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(m_windowWidth), static_cast<float>(m_windowHeight), 0.0f);
 
-                    m_shader->use();
-                    m_shader->setMat4("uProjection", projection);
-                    m_shader->setInt("uTexture", 0);
+                m_shader->use();
+                m_shader->setMat4("uProjection", projection);
+                m_shader->setInt("uTexture", 0);
 
-                    glGenVertexArrays(1, &m_vao);
-                    glBindVertexArray(m_vao);
+                glGenVertexArrays(1, &m_vao);
+                glBindVertexArray(m_vao);
 
-                    glGenBuffers(1, &m_vbo);
-                    glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-            
-                    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
-                    glEnableVertexAttribArray(0);
-                    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
+                glGenBuffers(1, &m_vbo);
+                glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
+        
+                glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
+                glEnableVertexAttribArray(0);
+                glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
 
-                    glBindBuffer(GL_ARRAY_BUFFER, 0);
-                    glBindVertexArray(0);
+                glBindBuffer(GL_ARRAY_BUFFER, 0);
+                glBindVertexArray(0);
             }
-    
 
         private:
             std::string m_font;
@@ -175,4 +188,3 @@
     };
 
     #endif
-#endif
