@@ -4,6 +4,8 @@
 #include "../../Core/Src/Core/Application.h"
 #include "../../Core/Src/OpenGL/OpenglBuild.h"
 #include "../../Core/Src/ImGui/ImguiBuild.h"
+#include "../../Core/Util/VertexBuffer.h"
+#include "../../Core/Util/VertexArray.h"
 #include "../../Core/Util/Shader.h"
 #include "../../Core/Util/TextRenderer.h"
 #include "../../Core/Util/Camera.h"
@@ -31,9 +33,7 @@ class PlayGroundLayer : public Layer
         Shader* m_textShader;
         Camera* m_camera;
         TextRenderer* m_textRenderer;
-        uint32_t m_vao;
-        uint32_t m_vbo;
-        uint32_t m_ibo;
+        VertexArray* m_vao;
         std::stringstream m_frameRate;
 
         glm::mat4 m_projection;

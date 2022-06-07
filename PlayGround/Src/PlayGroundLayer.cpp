@@ -11,9 +11,7 @@ PlayGroundLayer::~PlayGroundLayer()
 	delete m_textShader;
 	delete m_camera;
 	delete m_textRenderer;
-    glDeleteVertexArrays(1, &m_vao);
-	glDeleteBuffers(1, &m_vbo);
-	glDeleteBuffers(1, &m_ibo);
+	delete m_vao;
 }
 
 void PlayGroundLayer::onAttach(Window* win)
@@ -31,8 +29,8 @@ void PlayGroundLayer::onAttach(Window* win)
 
 	m_quadColour = {0.34f, 0.57f, 0.89f};
 
-	glGenVertexArrays(1, &m_vao);
-	glBindVertexArray(m_vao);
+	m_vao = new VertexArray();
+	m_vao->bind();
 
 	float vertices[] = {
 		-0.5f, -0.5f, 0.0f,
@@ -41,21 +39,22 @@ void PlayGroundLayer::onAttach(Window* win)
 		-0.5f,  0.5f, 0.0f
 	};
 
-	glGenBuffers(1, &m_vbo);
-	glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	VertexBuffer vbo(GL_ARRAY_BUFFER);
+	vbo.bind();
+	vbo.setData(sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, 0);
+	m_vao->setAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, 0);
 
 	uint32_t indices[] = {
          0, 1, 2,
          2, 3, 0 
     };
 
-	glGenBuffers(1, &m_ibo);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+	VertexBuffer ibo(GL_ELEMENT_ARRAY_BUFFER);
+	ibo.bind();
+	ibo.setData(sizeof(indices), indices, GL_STATIC_DRAW);
+
+	m_vao->unBind();
 
 	m_textRenderer = new TextRenderer(m_textShader, m_window->getWidth(), m_window->getWidth());
 	m_textRenderer->loadFont("PlayGround/Assets/fonts/OCRAEXT.TTF", 24);
@@ -88,8 +87,10 @@ void PlayGroundLayer::onRender()
 
 	m_shader->setVec3("uColour", m_quadColour);
 
-    glBindVertexArray(m_vao);
+    m_vao->bind();
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+	m_vao->unBind();
+	
 	m_textRenderer->render(m_frameRate.str(), {0.0f, 30.0f}, 0.5f, {0.0f, 1.0f, 0.0f}, false);
 }
 
