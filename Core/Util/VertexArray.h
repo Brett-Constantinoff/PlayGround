@@ -1,7 +1,8 @@
 #pragma once
 
-#include "../Src/OpenGL/OpenglBuild.h"
 #include <stdint.h>
+
+#include "../Src/OpenGL/OpenglBuild.h"
 
 class VertexArray
 {

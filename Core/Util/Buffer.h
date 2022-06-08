@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Src/OpenGL/OpenglBuild.h"
+
 #include <stdint.h>
 
 class Buffer

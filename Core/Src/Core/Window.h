@@ -1,12 +1,13 @@
 #pragma once
 
-
 #include "../OpenGL/OpenglBuild.h"
-#include <string>
+
 #include <iostream>
+#include <string>
 
 
-class Window{
+class Window
+{
     public:
         Window(const std::string& label, uint32_t width, uint32_t height);
         ~Window();

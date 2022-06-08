@@ -7,7 +7,6 @@
 #include "../Libs/glm/gtc/type_ptr.hpp"
 #include "../Src/Core/Window.h"
 
-
 class MousePicker
 {
     public:

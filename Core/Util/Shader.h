@@ -1,7 +1,8 @@
 #pragma once
 
-#include <string>
 #include "../Libs/glm/glm.hpp"
+
+#include <string>
 
 struct shaderSource
 {

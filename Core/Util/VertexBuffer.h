@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Buffer.h"
+
 #include <stdint.h>
 
 class VertexBuffer : public Buffer

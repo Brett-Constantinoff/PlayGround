@@ -1,7 +1,11 @@
 #pragma once
 
-#include <vector>
 #include "Layer.h"
+
+#include <stack>
+#include <vector>
+
+
 
 class LayerStack
 {
@@ -11,17 +15,12 @@ class LayerStack
 
         void push(Layer* layer, Window* win);
         void pop();
+        int size();
+        void updateLayers(float dt);
 
-        std::vector<Layer*>::iterator begin()
-        {
-            return m_layers.begin();
-        }
-        std::vector<Layer*>::iterator end()
-        {
-            return m_layers.end();
-        }
+    private:
+        bool isEmpty();
 
-        private:
-            std::vector<Layer*> m_layers;
-           
+    private:
+        std::vector<Layer*> m_layers;
 };

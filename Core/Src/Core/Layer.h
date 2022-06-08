@@ -1,7 +1,8 @@
 #pragma once
 
-#include <string>
 #include "Window.h"
+
+#include <string>
 
 class Layer
 {

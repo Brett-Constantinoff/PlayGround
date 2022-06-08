@@ -1,11 +1,12 @@
 #pragma once
 
-#include <string.h>
-#include "Window.h"
 #include "Layer.h"
 #include "LayerStack.h"
-#include "../OpenGL/OpenglLayer.h"
 #include "../ImGui/ImguiLayer.h"
+#include "../OpenGL/OpenglLayer.h"
+#include "Window.h"
+
+#include <string.h>
 
 class Application
 {
@@ -17,10 +18,12 @@ class Application
         void pushLayer(Layer* layer);
 
     private:
-        OpenglLayer* m_openglLayer;
         ImguiLayer* m_imguiLayer;
-        Window* m_window;   
+        OpenglLayer* m_openglLayer;
         LayerStack* m_layerStack;
+       
+        Window* m_window;   
+
         float m_lastFrame = 0.0f;
 };
 

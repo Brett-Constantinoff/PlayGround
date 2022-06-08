@@ -1,17 +1,18 @@
 #pragma once
 
 #if __has_include(<ft2build.h>)
-    #include <ft2build.h>
-    #include FT_FREETYPE_H  
+
     #include "../Src/OpenGL/OpenglBuild.h"
     #include "../Libs/glm/glm.hpp"
     #include "../Libs/glm/gtc/matrix_transform.hpp"
     #include "../Libs/glm/gtc/type_ptr.hpp"
+    #include "Shader.h"
+
+    #include <ft2build.h>
+    #include FT_FREETYPE_H  
     #include <iostream>
     #include <map>
     #include <sstream>
-
-    #include "Shader.h"
 
     typedef struct
     {
