@@ -1,7 +1,7 @@
-# OpenGL-Base
-### NOTE: This project template structure is intented for MacOS only
+# PlayGround Engine
+### NOTE: This project is supported for MacOS only (for now)
 
-This project is designed to be a starting point for writing OpenGL code on MacOS
+This project is designed to be a small scale rendering engine using OpenGL
 
 # Requirements
 
