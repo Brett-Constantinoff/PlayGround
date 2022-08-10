@@ -5,8 +5,8 @@
 #include "PlayGroundLayer.h"
 
 
-class PlayGroundApp : public Application
+class PlayGround : public Application
 {
     public:
-        PlayGroundApp();
+        PlayGround();
 };

@@ -1,11 +1,11 @@
-#include "PlayGroundLayer.h"
+#include "ExampleLayer.h"
 
-PlayGroundLayer::PlayGroundLayer()
+ExampleLayer::ExampleLayer()
 {
 
 }
 
-PlayGroundLayer::~PlayGroundLayer()
+ExampleLayer::~ExampleLayer()
 {
     delete m_shader;
 	delete m_textShader;
@@ -14,7 +14,7 @@ PlayGroundLayer::~PlayGroundLayer()
 	delete m_vao;
 }
 
-void PlayGroundLayer::onAttach(Window* win)
+void ExampleLayer::onAttach(Window* win)
 {
     glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
@@ -60,12 +60,12 @@ void PlayGroundLayer::onAttach(Window* win)
 	m_textRenderer->loadFont("PlayGround/Assets/fonts/OCRAEXT.TTF", 24);
 }
 
-void PlayGroundLayer::onDetach()
+void ExampleLayer::onDetach()
 {
 
 }
 
-void PlayGroundLayer::onUpdate(float dt)
+void ExampleLayer::onUpdate(float dt)
 {
 	m_camera->move(m_window->getContext(), dt);
 
@@ -78,7 +78,7 @@ void PlayGroundLayer::onUpdate(float dt)
 	m_frameRate << ImGui::GetIO().Framerate << " FPS";
 };
 
-void PlayGroundLayer::onRender()
+void ExampleLayer::onRender()
 {
 	glUseProgram(m_shader->getId());
 
@@ -94,7 +94,7 @@ void PlayGroundLayer::onRender()
 	m_textRenderer->render(m_frameRate.str(), {0.0f, 30.0f}, 0.5f, {0.0f, 1.0f, 0.0f}, false);
 }
 
-void PlayGroundLayer::onRenderImgui()
+void ExampleLayer::onRenderImgui()
 {
     ImGui::Begin("Main Window");
 

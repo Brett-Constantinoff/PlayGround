@@ -16,11 +16,11 @@
 #include <iostream>
 #include <sstream>
 
-class PlayGroundLayer : public Layer
+class ExampleLayer : public Layer
 {
     public:
-        PlayGroundLayer();
-        virtual ~PlayGroundLayer();
+        ExampleLayer();
+        virtual ~ExampleLayer();
 
         virtual void onAttach(Window* win) override;
         virtual void onDetach() override;
