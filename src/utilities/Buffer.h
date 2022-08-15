@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Src/OpenGL/OpenglBuild.h"
+#include "../build/OpenglBuild.h"
 
 #include <stdint.h>
 

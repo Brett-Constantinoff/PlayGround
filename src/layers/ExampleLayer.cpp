@@ -22,8 +22,8 @@ void ExampleLayer::onAttach(Window* win)
 
 	m_window = win;
 
-	m_shader = new Shader("PlayGround/Assets/glsl/mainShader.glsl");
-	m_textShader = new Shader("PlayGround/Assets/glsl/textShader.glsl");
+	m_shader = new Shader("src/assets/glsl/mainShader.glsl");
+	m_textShader = new Shader("src/assets/glsl/textShader.glsl");
 
 	m_camera = new Camera({0.0f, 0.0f, 7.5f}, {0.0f, 0.0f, -1.0f}, {0.0f, 1.0f, 0.0f});
 
@@ -57,7 +57,7 @@ void ExampleLayer::onAttach(Window* win)
 	m_vao->unBind();
 
 	m_textRenderer = new TextRenderer(m_textShader, m_window->getWidth(), m_window->getWidth());
-	m_textRenderer->loadFont("PlayGround/Assets/fonts/OCRAEXT.TTF", 24);
+	m_textRenderer->loadFont("src/assets/fonts/OCRAEXT.TTF", 24);
 }
 
 void ExampleLayer::onDetach()

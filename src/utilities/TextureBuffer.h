@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Buffer.h"
-#include "../Libs/Stb/stb_image.h"
+#include "../libs/Stb/stb_image.h"
 
 #include <stdint.h>
 #include <iostream>

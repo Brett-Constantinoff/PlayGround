@@ -2,7 +2,7 @@
 
 #include <stdint.h>
 
-#include "../Src/OpenGL/OpenglBuild.h"
+#include "../build/OpenglBuild.h"
 
 class VertexArray
 {

@@ -2,8 +2,8 @@
 
 #include "Layer.h"
 #include "LayerStack.h"
-#include "../ImGui/ImguiLayer.h"
-#include "../OpenGL/OpenglLayer.h"
+#include "layers/ImguiLayer.h"
+#include "layers/OpenglLayer.h"
 #include "Window.h"
 
 #include <string.h>

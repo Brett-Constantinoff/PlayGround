@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../Libs/glm/glm.hpp"
-#include "../Libs/glm/gtc/matrix_transform.hpp"
-#include "../Libs/glm/gtc/type_ptr.hpp"
-#include "../Src/OpenGL/OpenglBuild.h"
+#include "../libs/glm/glm.hpp"
+#include "../libs/glm/gtc/matrix_transform.hpp"
+#include "../libs/glm/gtc/type_ptr.hpp"
+#include "../build/OpenglBuild.h"
 
 class Camera
 {

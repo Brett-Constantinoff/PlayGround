@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Core/Layer.h"
-#include "OpenglBuild.h"
+#include "../Layer.h"
+#include "../../build/OpenglBuild.h"
 
 class OpenglLayer : public Layer
 {

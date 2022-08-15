@@ -1,6 +1,12 @@
 #pragma once
 
-#include "../Libs/glm/glm.hpp"
+#include "../libs/glm/glm.hpp"
+#include "../build/OpenglBuild.h"
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <sstream>
+
 
 #include <string>
 

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ImguiBuild.h"
-#include "../Core/Layer.h"
+#include "../../build/ImguiBuild.h"
+#include "../Layer.h"
 
 class ImguiLayer : public Layer
 {

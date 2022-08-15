@@ -1,17 +1,17 @@
 #pragma once
 
-#include "../../Core/Src/Core/Layer.h"
-#include "../../Core/Src/Core/Application.h"
-#include "../../Core/Src/OpenGL/OpenglBuild.h"
-#include "../../Core/Src/ImGui/ImguiBuild.h"
-#include "../../Core/Util/VertexBuffer.h"
-#include "../../Core/Util/VertexArray.h"
-#include "../../Core/Util/Shader.h"
-#include "../../Core/Util/TextRenderer.h"
-#include "../../Core/Util/Camera.h"
-#include "../../Core/Libs/glm/glm.hpp"
-#include "../../Core/Libs/glm/gtc/matrix_transform.hpp"
-#include "../../Core/Libs/glm/gtc/type_ptr.hpp"
+#include "../utilities/Layer.h"
+#include "../utilities/Application.h"
+#include "../build/OpenglBuild.h"
+#include "../build/ImguiBuild.h"
+#include "../utilities/VertexBuffer.h"
+#include "../utilities/VertexArray.h"
+#include "../utilities/Shader.h"
+#include "../utilities/TextRenderer.h"
+#include "../utilities/Camera.h"
+#include "../libs/glm/glm.hpp"
+#include "../libs/glm/gtc/matrix_transform.hpp"
+#include "../libs/glm/gtc/type_ptr.hpp"
 
 #include <iostream>
 #include <sstream>

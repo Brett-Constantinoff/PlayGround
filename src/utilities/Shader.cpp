@@ -1,9 +1,4 @@
 #include "Shader.h"
-#include "../Src/OpenGL/OpenglBuild.h"
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <sstream>
 
 Shader::Shader(const std::string &filepath)
 {
@@ -71,7 +66,7 @@ shaderSource Shader::parseShader(const std::string &filePath)
     std::ifstream stream(filePath); //gets current input stream
     if(!stream)
     {
-        std::cout << "ERROR::CANNOT FIND FILE" << std::endl;
+        std::cout << "ERROR::CANNOT FIND FILE : " << filePath << std::endl;
         exit(EXIT_FAILURE);
     }
     std::string line; //string to hold each line from file
