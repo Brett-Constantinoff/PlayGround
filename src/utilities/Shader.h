@@ -25,12 +25,14 @@ class Shader
         void setVec4(const char* location, glm::vec4 uniform);
         void setMat4(const char* location, glm::mat4 uniform);
         void setInt(const char* location, int uniform);
+        void setFloat(const char* location, float unifrom);
         void use( void );
         
     private:
         int m_ID;
         shaderSource parseShader(const std::string &filePath);
         unsigned int compileShader(const std::string &source, unsigned int type); 
+        int checkUniform(const char* location);
         
 };
 
